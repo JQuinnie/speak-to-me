@@ -1,0 +1,7 @@
+<h1>All The Greetings!</h1>
+
+<% @greetings.each do |language, message| %>
+  <p><strong><%= language.capitalize %>:</strong> <%= message %></p>
+<% end %>
+
+<%= link_to 'Back Home', root_path %>
