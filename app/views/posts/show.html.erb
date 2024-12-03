@@ -1,3 +1,10 @@
 <h1><%= @post.title %></h1>
 <p><%= @post.content %></p>
+
+<% if @giphy_image_url.present? %>
+  <div>
+    <img src="<%= @giphy_image_url %>" alt="Random Giphy" />
+  </div>
+<% end %>
+<br/>
 <%= link_to 'Back to Posts', posts_path %>
