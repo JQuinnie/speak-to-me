@@ -11,16 +11,19 @@ class PostsController < ApplicationController
   private
 
   def fetch_giphy_image(query)
-    api_key = ENV['GIPHY_API_KEY']
-    safe_query = CGI.escape(query)
-    url = "https://api.giphy.com/v1/gifs/search?api_key=#{api_key}&q=#{safe_query}&rating=g&limit=1&offset=#{rand(1000)}"
+    if (api_key = ENV['GIPHY_API_KEY']).present?
+      safe_query = CGI.escape(query)
+      url = "https://api.giphy.com/v1/gifs/search?api_key=#{api_key}&q=#{safe_query}&rating=g&limit=1&offset=#{rand(1000)}"
 
-    response = HTTParty.get(url)
+      response = HTTParty.get(url)
 
-    if response.code == 200 && response["data"].any?
-      response["data"].sample["images"]["original"]["url"]
+      if response.code == 200 && response["data"].any?
+        response["data"].sample["images"]["original"]["url"]
+      else
+        "https://media.giphy.com/media/26AHdRkxHMyHLV1u0/giphy.gif"
+      end
     else
-      "https://media.giphy.com/media/26AHdRkxHMyHLV1u0/giphy.gif"
+      "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYnpxdnJ2dm9iam9zbGpmZzBlMHo1MmZjZndhN2Z2dWlzcW1vaTQwbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ALgyanclvTpPG/giphy.gif"
     end
   end
 end
