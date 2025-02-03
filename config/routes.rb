@@ -3,5 +3,5 @@ Rails.application.routes.draw do
 
   get 'greetings', to: 'greetings#index'
 
-  resources 'posts', only: [:index, :show]
+  resources 'posts', only: [:index, :show, :new, :create]
 end
