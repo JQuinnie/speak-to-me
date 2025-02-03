@@ -1,5 +1,17 @@
 <h1>New Post</h1>
+
 <%= form_with(model: @post, local: true) do |form| %>
+  <% if @post.errors.any? %>
+    <div class="errors" style="color: red;">
+      <h2>Uhoh! There was an Error:</h2>
+      <ul>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div>
     <%= form.label :title %>
     <%= form.text_field :title %>
